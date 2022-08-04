@@ -1,5 +1,5 @@
 ; VARIOUS PREPROCESSING OPTIONS = 
-;title                    = 3k7o (obsolete)
+;title                    = 
 ;cpp                      = /usr/bin/cpp (obsolete)
 include                  = 
 define                   =  -DPOSRES
