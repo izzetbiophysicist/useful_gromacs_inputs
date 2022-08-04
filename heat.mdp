@@ -1,4 +1,4 @@
-;HEATING PROCEDURE - 500 ps with annnealing 0 -310K
+;HEATING PROCEDURE
 ;using position restraints to crystal water oxygens and heavy protein atoms
 define = -DPOSRES
 constraints = h-bonds
