@@ -10,9 +10,9 @@ gmx trjconv -s md_nowat.tpr -f md_nowat.xtc -o md_nowat_whole -pbc whole
 gmx trjconv -s steep_nowat.tpr -f md_nowat_whole.xtc -o md_nowat_whole_nojump -pbc nojump
 gmx trjconv -s steep_nowat.tpr -f md_nowat_whole_nojump.xtc -o md_nowat_whole_nojump_fit.xtc -fit rot+trans
 
-### create CA or backbone files
+#### Additional steps for creating CA or backgone files
 gmx trjconv -s pressure_unres.tpr -f pressure_unres.gro -o pressure_unres_nowat_CA.gro
 gmx trjconv -s steep_nowat.tpr -f md_nowat_whole_nojump.xtc -o md_nowat_whole_nojump_fit_CA.xtc -fit rot+trans
-gmx convert-tpr -s steep.tpr -o steep_nowat.tpr  ###output apenas CA
+gmx convert-tpr -s steep.tpr -o steep_nowat.tpr 
 gmx trjconv -s steep_nowat.tpr -f md_nowat_whole_nojump.xtc -o md_nowat_whole_nojump_fit.xtc -fit rot+trans
 
