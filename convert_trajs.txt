@@ -1,0 +1,41 @@
+#take 3
+# refazer steep.tpr e copiar para pasta
+# usar backbone para least-squarefit no gromacs e no vmd
+### cp ../steep.tpr .
+
+gmx trjconv -s md.tpr -f md.xtc -o md_nowat.xtc
+
+
+gmx trjconv -s pressure_unres.tpr -f pressure_unres.gro -o pressure_unres_nowat.gro
+gmx convert-tpr -s pressure_unres.tpr -o pressure_unres_nowat.tpr
+
+gmx convert-tpr -s steep.tpr -o steep_nowat.tpr
+gmx convert-tpr -s md.tpr -o md_nowat.tpr
+gmx trjconv -s pressure_unres_nowat.tpr -f pressure_unres_nowat.gro -o firstframe.gro -b 0 -e 2 -pbc nojump
+gmx trjconv -s md_nowat.tpr -f md_nowat.xtc -o md_nowat_whole -pbc whole
+gmx trjconv -s steep_nowat.tpr -f md_nowat_whole.xtc -o md_nowat_whole_nojump -pbc nojump
+gmx trjconv -s steep_nowat.tpr -f md_nowat_whole_nojump.xtc -o md_nowat_whole_nojump_fit.xtc -fit rot+trans
+
+### create CA or backbone files
+gmx trjconv -s pressure_unres.tpr -f pressure_unres.gro -o pressure_unres_nowat_CA.gro
+gmx trjconv -s steep_nowat.tpr -f md_nowat_whole_nojump.xtc -o md_nowat_whole_nojump_fit_CA.xtc -fit rot+trans
+gmx convert-tpr -s steep.tpr -o steep_nowat.tpr  ###output apenas CA
+gmx trjconv -s steep_nowat.tpr -f md_nowat_whole_nojump.xtc -o md_nowat_whole_nojump_fit.xtc -fit rot+trans ### alinhar
+
+
+
+
+#alinhar com protein e usar C-alpha como output
+
+
+#ABRIR NO VMD SOBRE PRESSURE_UNRES_NOWAT.GRo, deletar primeiro frame, alinhar e calcular rmsd -> exportar arquivo
+#
+
+###gmx trjconv -s md_nowat.tpr -f pressure_unres_nowat.gro -o pressure_unres_nowat_whole.gro -pbc whole
+###gmx trjconv -s steep_nowat.tpr -f pressure_unres_nowat_whole.gro -o pressure_unres_nowat_whole_nojump.gro -pbc nojump
+##gmx trjconv -s steep_nowat.tpr -f pressure_unres_nowat_whole_nojump.gro -o ### pressure_unres_nowat_whole_nojump_fit.gro -fit  rot+trans
+
+
+### create steep nowat
+
+gmx trjconv -s steep.tpr -f steep.gro -o steep_nowat.gro

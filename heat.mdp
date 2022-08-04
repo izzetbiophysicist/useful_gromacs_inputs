@@ -1,0 +1,55 @@
+;HEATING PROCEDURE - 500 ps with annnealing 0 -310K
+;using position restraints to crystal water oxygens and heavy protein atoms
+define = -DPOSRES
+constraints = h-bonds
+integrator = md
+dt = 0.002 ; ps !
+nsteps = 500000 ; total 1000.0 ps.
+nstcomm = 10
+nstxout = 2500 ; collect data every 5.0 ps
+nstxtcout = 2500
+nstvout = 5000
+nstfout = 0
+nstlog = 10
+nstenergy = 50
+nstlist = 10
+ns_type = grid
+;rlist = 1.0
+coulombtype = PME
+;rcoulomb = 1.0
+vdwtype = cut-off
+;rvdw = 1.4
+pme_order = 4
+ewald_rtol = 1e-5
+optimize_fft = yes
+DispCorr = no
+; Berendsen temperature coupling is on
+Tcoupl = v-rescale
+tau_t = 0.1 
+tc-grps = system
+ref_t = 0
+; Pressure coupling is off
+Pcoupl = no
+Pcoupltype = Semiisotropic
+tau_p = 1.0
+compressibility = 4.5e-5
+ref_p = 1.0
+; SIMULATED ANNEALING  
+; Type of annealing for each temperature group (no/single/periodic)
+annealing                =  single
+; Number of time points to use for specifying annealing in each group
+annealing_npoints        = 2
+; List of times at the annealing points for each group
+annealing_time           = 0 500 
+; Temp. at each annealing point, for each group.
+annealing_temp           = 0 310
+
+; Generate velocites is on at 0 K.
+gen_vel = yes
+gen_temp = 0.5
+gen_seed = 16807
+; NEIGHBORSEARCHING PARAMETERS
+cutoff-scheme            = Verlet
+verlet-buffer-drift      = 0.005
+
+

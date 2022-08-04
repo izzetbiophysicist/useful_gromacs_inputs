@@ -1,0 +1,23 @@
+define = -Ddistance_res ;-DFLEXIBLE
+constraints = none
+integrator = steep ; cg ;steep
+dt = 0.002 ; ps !
+nsteps = 100000
+nstlist = 10
+nstxout = 50
+ns_type = grid
+;rlist = 1.0
+coulombtype = PME
+;rcoulomb = 1.0
+vdwtype = cut-off
+;rvdw = 1.4
+;optimize_fft = yes
+;
+; Energy minimizing stuff
+;
+emtol = 0.01
+emstep = 0.001
+
+
+cutoff-scheme            = Verlet
+verlet-buffer-tolerance  = 0.005
